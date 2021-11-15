@@ -1,0 +1,48 @@
+import java.util.logging.XMLFormatter;
+
+public class CarteRumour {
+    private String nom;
+    private int numero;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public static void main(String[] args) {
+        CarteRumour[] carteRumour = new CarteRumour[12];
+        carteRumour[0].setNom("Angry Mob");
+        carteRumour[1].setNom("The Inquisition");
+        carteRumour[2].setNom("Pointed Hat");
+        carteRumour[3].setNom("Hooked Nose");
+        carteRumour[4].setNom("BroomStick");
+        carteRumour[5].setNom("Wart");
+        carteRumour[6].setNom("Ducking Stool");
+        carteRumour[7].setNom("Cauldron");
+        carteRumour[8].setNom("Evil Eye");
+        carteRumour[9].setNom("Toad");
+        carteRumour[10].setNom("Black Cat");
+        carteRumour[11].setNom("Pet Newt");
+        for (int i =0; i < carteRumour.length; i++){
+            carteRumour[i].setNumero(i);
+        }
+
+    }
+
+
+
+
+
+
+}
