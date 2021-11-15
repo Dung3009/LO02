@@ -1,0 +1,95 @@
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
+
+
+
+public class SystemDuJeu {
+    public int CarteRumour = 12;
+    public int CarteID = 6;
+
+    public Joueur definirJoueur(String nom, ArrayList<Joueur> JoueurList){
+        int i=0;
+        boolean check = false;
+        while (check == false){
+            while(JoueurList.get(i).getNom() != nom && i < JoueurList.size()){
+                i++;
+            }
+            if (i == JoueurList.size()){
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Le nom est faux. Veuillez resaisir le nom ");
+                String nom2 = scanner.nextLine();
+                scanner.close();
+            }
+            else{check = true;}
+        }
+        return JoueurList.get(i);
+    }
+    public ArrayList<CarteRumour> melangerCarteRumour(ArrayList<CarteRumour> carteRumour){
+        Random rnd = ThreadLocalRandom.current();
+        for (int i =0; i < carteRumour.size(); i++){
+            int index  = rnd.nextInt(11);
+            CarteRumour a = new CarteRumour();
+            a = carteRumour.get(i);
+            carteRumour.get(i).setNom(carteRumour.get(index).getNom());
+            carteRumour.get(i).setNumero(index);
+            carteRumour.get(index).setNom(a.getNom());
+            carteRumour.get(index).setNumero(i);
+        }
+        return carteRumour;
+    }
+
+    public void distribuerCarteRumour(ArrayList<Joueur> JoueurList, ArrayList<CarteRumour> carteRumour){
+        carteRumour = melangerCarteRumour(carteRumour);
+        int nombrecarte = Math.abs( 12 / JoueurList.size());
+        ArrayList<CarteRumour> carteMain = new ArrayList<>(nombrecarte);
+        for(int i = 0; i < JoueurList.size(); i++){
+            JoueurList.get(i).setNombreCarteR(nombrecarte);
+            for (int j =0; j < nombrecarte; j++){
+                carteMain.clear();
+                carteMain.add(carteRumour.get(nombrecarte*i+j));
+            }
+            JoueurList.get(i).setCarteEnMain(carteMain);
+        }
+    }
+    public boolean verifierID(Joueur joueur){
+        if(joueur.getRole() == "Villager"){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public void ajouterPointAccuser(Joueur joueur){
+        joueur.setPoint(joueur.getPoint()+1);
+    }
+    public void ajouterPointFinal(ArrayList<Joueur> joueur){
+        for (int i =0; i < joueur.size(); i++){
+            if(joueur.get(i).getRole() == "Villager"){
+                joueur.get(i).setPoint(joueur.get(i).getPoint()+1);
+            }
+            else{
+                joueur.get(i).setPoint(joueur.get(i).getPoint()+2);
+
+            }
+        }
+    }
+
+    public void utiliserHuntEffet(Joueur joueur, CarteRumour carteRumour){
+
+        if (carteRumour.getNom() == "Angry Mob"){
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+}
