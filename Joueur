@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Joueur {
+    private String nom;
+    private int point;
+    boolean estAccuse;
+    private int nombreCarteRumour;
+    private ArrayList<CarteRumour> carteEnMain;
+    final private int nombreCarteID =1;
+    private String role;
+
+    public ArrayList<CarteRumour> getCarteEnMain() {
+        return carteEnMain;
+    }
+
+    public void setCarteEnMain(ArrayList<CarteRumour> carteEnMain) {
+        this.carteEnMain = carteEnMain;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public int getNombreCarteR() {
+        return nombreCarteRumour;
+    }
+
+    public void setNombreCarteR(int nombreCarteR) {
+        this.nombreCarteRumour = nombreCarteR;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void choisirRole(Joueur joueur) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ecrire 0 si tu veux jouer comme un Witch, ecrire 1 si tu veux jouer comme un Villager ");
+        int decision = scanner.nextInt();
+        if (decision == 1){
+            joueur.setRole("Villager");
+        }
+        else if(decision == 0){
+            joueur.setRole("Witch");
+        }
+    }
+    public Joueur choisirJoueur(ArrayList<Joueur> joueurList){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrer le nom de joueur ");
+        String nom = scanner.nextLine();
+        scanner.close();
+        SystemDuJeu systemeJeu = new SystemDuJeu();
+        Joueur joueur = new Joueur();
+        joueur = systemeJeu.definirJoueur(nom, joueurList);
+        return joueur;
+    }
+    public void reagirAccuser(Joueur joueurEstAccuse, Joueur joueurAccuse){
+        boolean check;
+        SystemDuJeu systemDuJeu = new SystemDuJeu();
+        Partie partie = new Partie();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Si vous voulez relever votre carte ID, tapper 1. Si vous voulew utiliser votre carteRumour, tapper 2 ");
+        int decision = scanner.nextInt();
+        if (decision == 1){
+            check = systemDuJeu.verifierID(joueurEstAccuse);
+            if (check){
+                systemDuJeu.ajouterPointAccuser(joueurAccuse);
+                partie.supprimerJoueur(joueurEstAccuse);
+
+            }
+        }
+    }
+
+
+
+
+}
